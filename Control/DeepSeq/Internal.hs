@@ -10,7 +10,7 @@ instance GDeepSeq U1 where
   gdeepseq = flip const
 
 instance GDeepSeq (K1 i a) where
-  gdeepseq = seq
+  gdeepseq = seq . unK1
 
 instance GDeepSeq a => GDeepSeq (M1 i c a) where
   gdeepseq = gdeepseq . unM1
