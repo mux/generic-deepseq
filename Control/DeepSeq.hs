@@ -25,4 +25,5 @@ instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e) =>
           DeepSeq (a,b,c,d,e)
 instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e, DeepSeq f) =>
           DeepSeq (a,b,c,d,e,f)
-instance DeepSeq a => DeepSeq [a]
+instance DeepSeq a => DeepSeq [a] where
+  deepseq = flip (foldr deepseq)
