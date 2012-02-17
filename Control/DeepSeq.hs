@@ -1,7 +1,10 @@
-{-# LANGUAGE DefaultSignatures, TypeOperators, FlexibleContexts #-}
-module DeepSeq where
+{-# LANGUAGE DefaultSignatures, FlexibleContexts #-}
+module DeepSeq
+  ( DeepSeq(..)
+  ) where
 
 import GHC.Generics
+import DeepSeq.Internal
 
 class DeepSeq a where
   deepseq :: a -> b -> b
@@ -23,22 +26,3 @@ instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e) =>
 instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e, DeepSeq f) =>
           DeepSeq (a,b,c,d,e,f)
 instance DeepSeq a => DeepSeq [a]
-
-class GDeepSeq f where
-  gdeepseq :: f a -> b -> b
-
-instance GDeepSeq U1 where
-  gdeepseq = flip const
-
-instance GDeepSeq (K1 i a) where
-  gdeepseq = seq
-
-instance GDeepSeq a => GDeepSeq (M1 i c a) where
-  gdeepseq = gdeepseq . unM1
-
-instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :*: b) where
-  gdeepseq (x :*: y) = gdeepseq y . gdeepseq x
-
-instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :+: b) where
-  gdeepseq (L1 x) = gdeepseq x
-  gdeepseq (R1 x) = gdeepseq x
