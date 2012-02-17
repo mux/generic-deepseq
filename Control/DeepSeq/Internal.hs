@@ -1,5 +1,5 @@
 {-# LANGUAGE TypeOperators #-}
-module DeepSeq.Internal where
+module Control.DeepSeq.Internal where
 
 import GHC.Generics
 

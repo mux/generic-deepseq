@@ -1,10 +1,10 @@
 {-# LANGUAGE DefaultSignatures, FlexibleContexts #-}
-module DeepSeq
+module Control.DeepSeq
   ( DeepSeq(..)
   ) where
 
 import GHC.Generics
-import DeepSeq.Internal
+import Control.DeepSeq.Internal
 
 class DeepSeq a where
   deepseq :: a -> b -> b
