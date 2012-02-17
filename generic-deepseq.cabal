@@ -1,0 +1,22 @@
+Name:		generic-deepseq
+Version:	1.0.0
+License-File:	LICENSE
+License:	BSD3
+Author:		Maxime Henrion
+Copyright:	2012, Maxime Henrion
+Maintainer:	Maxime Henrion <mhenrion@gmail.com>
+Bug-Reports:	http://bitbucket.org/mumux/generic-deepseq/issues/
+Category:	Control
+Synopsis:	Generic deep evaluation of data structures
+Build-Type:	Simple
+Cabal-Version:	>= 1.6
+Tested-with:	GHC ==7.4
+
+Source-Repository head
+  Type:			mercurial
+  Location:		http://bitbucket.org/mumux/generic-deepseq/
+
+Library
+  Build-Depends:	base >= 3 && < 5, ghc-prim
+  Exposed-Modules:	Control.DeepSeq
+  GHC-Options:		-Wall -O2 -funbox-strict-fields
