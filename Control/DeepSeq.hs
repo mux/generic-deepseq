@@ -18,9 +18,8 @@
 --
 module Control.DeepSeq
   (
-    -- * The DeepSeq type class.
     DeepSeq(..)
-    -- * Convenience functions.
+    -- * Convenience functions
   , ($!!)
   , rnf
   , force
@@ -31,6 +30,8 @@ import Data.Word
 import GHC.Generics
 
 class DeepSeq a where
+  -- | Evaluates its first argument to normal form, and then returns its
+  -- second argument as the result.
   deepseq :: a -> b -> b
   default deepseq :: (Generic a, GDeepSeq (Rep a)) => a -> b -> b
   deepseq = gdeepseq . from
