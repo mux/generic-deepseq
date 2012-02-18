@@ -12,22 +12,22 @@ class DeepSeq a where
   default deepseq :: (Generic a, GDeepSeq (Rep a)) => a -> b -> b
   deepseq = gdeepseq . from
 
-instance DeepSeq Bool where deepseq = seq
-instance DeepSeq Char where deepseq = seq
-instance DeepSeq Double where deepseq = seq
-instance DeepSeq Float where deepseq = seq
-instance DeepSeq Int where deepseq = seq
-instance DeepSeq Int8 where deepseq = seq
-instance DeepSeq Int16 where deepseq = seq
-instance DeepSeq Int32 where deepseq = seq
-instance DeepSeq Int64 where deepseq = seq
-instance DeepSeq Word where deepseq = seq
-instance DeepSeq Word8 where deepseq = seq
-instance DeepSeq Word16 where deepseq = seq
-instance DeepSeq Word32 where deepseq = seq
-instance DeepSeq Word64 where deepseq = seq
+instance DeepSeq Bool    where deepseq = seq
+instance DeepSeq Char    where deepseq = seq
+instance DeepSeq Double  where deepseq = seq
+instance DeepSeq Float   where deepseq = seq
+instance DeepSeq Int     where deepseq = seq
+instance DeepSeq Int8    where deepseq = seq
+instance DeepSeq Int16   where deepseq = seq
+instance DeepSeq Int32   where deepseq = seq
+instance DeepSeq Int64   where deepseq = seq
+instance DeepSeq Word    where deepseq = seq
+instance DeepSeq Word8   where deepseq = seq
+instance DeepSeq Word16  where deepseq = seq
+instance DeepSeq Word32  where deepseq = seq
+instance DeepSeq Word64  where deepseq = seq
 instance DeepSeq Integer where deepseq = seq
-instance DeepSeq () where deepseq = seq
+instance DeepSeq ()      where deepseq = seq
 
 instance (DeepSeq a, DeepSeq b) => DeepSeq (a,b)
 instance (DeepSeq a, DeepSeq b, DeepSeq c) => DeepSeq (a,b,c)
