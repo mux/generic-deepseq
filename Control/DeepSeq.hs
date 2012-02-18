@@ -26,6 +26,7 @@ module Control.DeepSeq
 
 import Data.Int
 import Data.Word
+import Data.Ratio
 import GHC.Generics
 
 class DeepSeq a where
@@ -68,6 +69,12 @@ instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e, DeepSeq f,
 instance DeepSeq a => DeepSeq [a]
 instance DeepSeq a => DeepSeq (Maybe a)
 instance (DeepSeq a, DeepSeq b) => DeepSeq (Either a b)
+
+-- We cannot derive an instance for Ratio automatically, because it is an
+-- abstract datatype (it doesn't export its constructors), and doesn't provide
+-- a Generic instance either.
+instance (Integral a, DeepSeq a) => DeepSeq (Ratio a) where
+  deepseq x = deepseq (denominator x) . deepseq (numerator x)
 
 class GDeepSeq f where
   gdeepseq :: f a -> b -> b
