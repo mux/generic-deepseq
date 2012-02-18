@@ -17,8 +17,7 @@
 -- for your datatypes without having to provide an implementation.
 --
 module Control.DeepSeq
-  (
-    DeepSeq(..)
+  ( DeepSeq(..)
     -- * Convenience functions
   , ($!!)
   , rnf
