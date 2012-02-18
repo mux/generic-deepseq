@@ -1,6 +1,26 @@
 {-# LANGUAGE DefaultSignatures, FlexibleContexts, TypeOperators #-}
+
+-- |
+-- Module:  Control.DeepSeq
+-- Copyright:   (c) 2012, Maxime Henrion
+-- License:     BSD-style (see the LICENSE file)
+--
+-- Maintainer:  Maxime Henrion <mhenrion@gmail.com>
+-- Stability:   stable
+-- Portability: portable
+--
+-- This module provides a 'deepseq' function for fully evaluating data
+-- structures (that is, evaluating to \"Normal Form\", and not just up to
+-- \"Head Normal Form\" like 'seq' does).
+--
+-- It uses the "GHC.Generics" framework so that you can generate instances
+-- for your datatypes without having to provide an implementation.
+--
 module Control.DeepSeq
-  ( DeepSeq(..)
+  (
+    -- * The DeepSeq type class.
+    DeepSeq(..)
+    -- * Convenience functions.
   , ($!!)
   , rnf
   , force
