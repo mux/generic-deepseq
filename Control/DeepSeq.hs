@@ -38,6 +38,8 @@ instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e) =>
 instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e, DeepSeq f) =>
           DeepSeq (a,b,c,d,e,f)
 instance DeepSeq a => DeepSeq [a]
+instance DeepSeq a => DeepSeq (Maybe a)
+instance (DeepSeq a, DeepSeq b) => DeepSeq (Either a b)
 
 class GDeepSeq f where
   gdeepseq :: f a -> b -> b
