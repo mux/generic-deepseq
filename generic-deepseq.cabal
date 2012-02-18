@@ -25,7 +25,7 @@ Description:
   > > [1,2,undefined] `deepseq` 3
   > *** Exception: Prelude.undefined
   .
-  Unlike the "deepseq" package, this implementation is based on the
+  Unlike the @deepseq@ package, this implementation is based on the
   "GHC.Generics" framework as found in GHC >= 7.2, so that it can generate
   instances automatically for any datatype that has a 'Generic' instance,
   without further code.
