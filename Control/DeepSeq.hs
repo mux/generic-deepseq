@@ -2,6 +2,8 @@
 module Control.DeepSeq
   ( DeepSeq(..)
   , ($!!)
+  , rnf
+  , force
   ) where
 
 import Data.Int
@@ -70,3 +72,9 @@ infixr 0 $!!
 
 ($!!) :: DeepSeq a => (a -> b) -> a -> b
 f $!! x = x `deepseq` f x
+
+rnf :: DeepSeq a => a -> ()
+rnf x = x `deepseq` ()
+
+force :: DeepSeq a => a -> a
+force x = x `deepseq` x
