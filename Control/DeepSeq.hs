@@ -41,6 +41,9 @@ instance DeepSeq a => DeepSeq [a]
 class GDeepSeq f where
   gdeepseq :: f a -> b -> b
 
+instance GDeepSeq V1 where
+  gdeepseq = flip const
+
 instance GDeepSeq U1 where
   gdeepseq = flip const
 
