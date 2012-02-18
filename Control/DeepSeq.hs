@@ -18,17 +18,19 @@ instance DeepSeq Char    where deepseq = seq
 instance DeepSeq Double  where deepseq = seq
 instance DeepSeq Float   where deepseq = seq
 instance DeepSeq Int     where deepseq = seq
+instance DeepSeq Word    where deepseq = seq
+instance DeepSeq Integer where deepseq = seq
+instance DeepSeq ()      where deepseq = seq
+
 instance DeepSeq Int8    where deepseq = seq
 instance DeepSeq Int16   where deepseq = seq
 instance DeepSeq Int32   where deepseq = seq
 instance DeepSeq Int64   where deepseq = seq
-instance DeepSeq Word    where deepseq = seq
+
 instance DeepSeq Word8   where deepseq = seq
 instance DeepSeq Word16  where deepseq = seq
 instance DeepSeq Word32  where deepseq = seq
 instance DeepSeq Word64  where deepseq = seq
-instance DeepSeq Integer where deepseq = seq
-instance DeepSeq ()      where deepseq = seq
 
 instance (DeepSeq a, DeepSeq b) => DeepSeq (a,b)
 instance (DeepSeq a, DeepSeq b, DeepSeq c) => DeepSeq (a,b,c)
@@ -37,6 +39,7 @@ instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e) =>
           DeepSeq (a,b,c,d,e)
 instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d, DeepSeq e, DeepSeq f) =>
           DeepSeq (a,b,c,d,e,f)
+
 instance DeepSeq a => DeepSeq [a]
 instance DeepSeq a => DeepSeq (Maybe a)
 instance (DeepSeq a, DeepSeq b) => DeepSeq (Either a b)
