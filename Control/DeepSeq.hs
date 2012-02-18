@@ -94,6 +94,7 @@ instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :+: b) where
 
 infixr 0 $!!
 
+-- | The deep analogue of '$!'.
 ($!!) :: DeepSeq a => (a -> b) -> a -> b
 f $!! x = x `deepseq` f x
 
