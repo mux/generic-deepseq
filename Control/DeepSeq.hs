@@ -1,6 +1,7 @@
 {-# LANGUAGE DefaultSignatures, FlexibleContexts, TypeOperators #-}
 module Control.DeepSeq
   ( DeepSeq(..)
+  , ($!!)
   ) where
 
 import Data.Int
@@ -59,3 +60,8 @@ instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :*: b) where
 instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :+: b) where
   gdeepseq (L1 x) = gdeepseq x
   gdeepseq (R1 x) = gdeepseq x
+
+infixr 0 $!!
+
+($!!) :: DeepSeq a => (a -> b) -> a -> b
+f $!! x = x `deepseq` f x
