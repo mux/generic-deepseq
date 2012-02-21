@@ -56,6 +56,8 @@ instance DeepSeq Word16   where deepseq = seq
 instance DeepSeq Word32   where deepseq = seq
 instance DeepSeq Word64   where deepseq = seq
 
+instance DeepSeq (a -> b) where deepseq = seq
+
 instance (DeepSeq a, DeepSeq b) => DeepSeq (a,b)
 instance (DeepSeq a, DeepSeq b, DeepSeq c) => DeepSeq (a,b,c)
 instance (DeepSeq a, DeepSeq b, DeepSeq c, DeepSeq d) => DeepSeq (a,b,c,d)
