@@ -34,6 +34,12 @@ Description:
   > data MyType = MyType String Int (Maybe Double)
   >   deriving Generic
   > instance DeepSeq MyType
+  .
+  Changes in version 2.0.0.0:
+  .
+  * Vastly improved performance. As a consequence of these changes, the member function of the DeepSeq class is now 'rnf', instead of 'deepseq'.
+  .
+  * New instances for functions, Ratio and Complex types.
 
 Source-Repository head
   Type:			mercurial
