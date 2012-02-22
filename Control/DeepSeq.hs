@@ -26,6 +26,7 @@ module Control.DeepSeq
 
 import Data.Int
 import Data.Word
+import Data.Complex
 import Data.Ratio
 import GHC.Generics
 
@@ -78,6 +79,12 @@ instance (DeepSeq a, DeepSeq b) => DeepSeq (Either a b)
 -- a Generic instance either.
 instance (Integral a, DeepSeq a) => DeepSeq (Ratio a) where
   rnf x = rnf (denominator x) `seq` rnf (numerator x)
+
+-- We should be able to derive an instance for Complex a automatically, but it
+-- turns out GHC 7.4.1 panics if we do that, so we provide an explicit instance
+-- for now.
+instance DeepSeq a => DeepSeq (Complex a) where
+  rnf (x :+ y) = rnf x `seq` rnf y
 
 class GDeepSeq f where
   grnf :: f a -> ()
