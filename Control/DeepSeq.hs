@@ -31,8 +31,7 @@ import Data.Ratio
 import GHC.Generics
 
 class DeepSeq a where
-  -- | Evaluates its first argument to normal form, and then returns its
-  -- second argument as the result.
+  -- | Evaluate its argument to normal form, and then return '()'.
   rnf :: a -> ()
   default rnf :: (Generic a, GDeepSeq (Rep a)) => a -> ()
   rnf = grnf . from
@@ -114,8 +113,11 @@ infixr 0 $!!
 ($!!) :: DeepSeq a => (a -> b) -> a -> b
 f $!! x = x `deepseq` f x
 
+-- | Evaluates its first argument to normal form, and then returns its
+-- second argument as the result.
 deepseq :: DeepSeq a => a -> b -> b
 deepseq x y = rnf x `seq` y
 
+-- | Evaluates its argument to normal form, and then return it.
 force :: DeepSeq a => a -> a
 force x = x `deepseq` x
