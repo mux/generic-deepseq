@@ -20,7 +20,7 @@ module Control.DeepSeq
   ( DeepSeq(..)
     -- * Convenience functions
   , ($!!)
-  , rnf
+  , deepseq
   , force
   ) where
 
@@ -32,31 +32,32 @@ import GHC.Generics
 class DeepSeq a where
   -- | Evaluates its first argument to normal form, and then returns its
   -- second argument as the result.
-  deepseq :: a -> b -> b
-  default deepseq :: (Generic a, GDeepSeq (Rep a)) => a -> b -> b
-  deepseq = gdeepseq . from
+  rnf :: a -> ()
+  default rnf :: (Generic a, GDeepSeq (Rep a)) => a -> ()
+  rnf = grnf . from
 
-instance DeepSeq Bool     where deepseq = seq
-instance DeepSeq Char     where deepseq = seq
-instance DeepSeq Double   where deepseq = seq
-instance DeepSeq Float    where deepseq = seq
-instance DeepSeq Int      where deepseq = seq
-instance DeepSeq Word     where deepseq = seq
-instance DeepSeq Integer  where deepseq = seq
-instance DeepSeq Ordering where deepseq = seq
-instance DeepSeq ()       where deepseq = seq
+-- Instances for primitive types.
+instance DeepSeq Bool     where rnf x = x `seq` ()
+instance DeepSeq Char     where rnf x = x `seq` ()
+instance DeepSeq Double   where rnf x = x `seq` ()
+instance DeepSeq Float    where rnf x = x `seq` ()
+instance DeepSeq Int      where rnf x = x `seq` ()
+instance DeepSeq Word     where rnf x = x `seq` ()
+instance DeepSeq Integer  where rnf x = x `seq` ()
+instance DeepSeq Ordering where rnf x = x `seq` ()
+instance DeepSeq ()       where rnf x = x `seq` ()
 
-instance DeepSeq Int8     where deepseq = seq
-instance DeepSeq Int16    where deepseq = seq
-instance DeepSeq Int32    where deepseq = seq
-instance DeepSeq Int64    where deepseq = seq
+instance DeepSeq Int8     where rnf x = x `seq` ()
+instance DeepSeq Int16    where rnf x = x `seq` ()
+instance DeepSeq Int32    where rnf x = x `seq` ()
+instance DeepSeq Int64    where rnf x = x `seq` ()
 
-instance DeepSeq Word8    where deepseq = seq
-instance DeepSeq Word16   where deepseq = seq
-instance DeepSeq Word32   where deepseq = seq
-instance DeepSeq Word64   where deepseq = seq
+instance DeepSeq Word8    where rnf x = x `seq` ()
+instance DeepSeq Word16   where rnf x = x `seq` ()
+instance DeepSeq Word32   where rnf x = x `seq` ()
+instance DeepSeq Word64   where rnf x = x `seq` ()
 
-instance DeepSeq (a -> b) where deepseq = seq
+instance DeepSeq (a -> b) where rnf x = x `seq` ()
 
 instance (DeepSeq a, DeepSeq b) => DeepSeq (a,b)
 instance (DeepSeq a, DeepSeq b, DeepSeq c) => DeepSeq (a,b,c)
@@ -76,29 +77,29 @@ instance (DeepSeq a, DeepSeq b) => DeepSeq (Either a b)
 -- abstract datatype (it doesn't export its constructors), and doesn't provide
 -- a Generic instance either.
 instance (Integral a, DeepSeq a) => DeepSeq (Ratio a) where
-  deepseq x = deepseq (denominator x) . deepseq (numerator x)
+  rnf x = rnf (denominator x) `seq` rnf (numerator x)
 
 class GDeepSeq f where
-  gdeepseq :: f a -> b -> b
+  grnf :: f a -> ()
 
 instance GDeepSeq V1 where
-  gdeepseq = flip const
+  grnf _ = ()
 
 instance GDeepSeq U1 where
-  gdeepseq = flip const
+  grnf _ = ()
 
 instance DeepSeq a => GDeepSeq (K1 i a) where
-  gdeepseq = deepseq . unK1
+  grnf = rnf . unK1
 
 instance GDeepSeq a => GDeepSeq (M1 i c a) where
-  gdeepseq = gdeepseq . unM1
+  grnf = grnf . unM1
 
 instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :*: b) where
-  gdeepseq (x :*: y) = gdeepseq x . gdeepseq y
+  grnf (x :*: y) = grnf x `seq` grnf y
 
 instance (GDeepSeq a, GDeepSeq b) => GDeepSeq (a :+: b) where
-  gdeepseq (L1 x) = gdeepseq x
-  gdeepseq (R1 x) = gdeepseq x
+  grnf (L1 x) = grnf x
+  grnf (R1 x) = grnf x
 
 infixr 0 $!!
 
@@ -106,8 +107,8 @@ infixr 0 $!!
 ($!!) :: DeepSeq a => (a -> b) -> a -> b
 f $!! x = x `deepseq` f x
 
-rnf :: DeepSeq a => a -> ()
-rnf x = x `deepseq` ()
+deepseq :: DeepSeq a => a -> b -> b
+deepseq x y = rnf x `seq` y
 
 force :: DeepSeq a => a -> a
 force x = x `deepseq` x
