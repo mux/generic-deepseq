@@ -18,9 +18,8 @@
 --
 module Control.DeepSeq
   ( DeepSeq(..)
-    -- * Convenience functions
-  , ($!!)
   , deepseq
+  , ($!!)
   , force
   ) where
 
