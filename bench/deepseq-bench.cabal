@@ -1,0 +1,15 @@
+Name:		deepseq-bench
+Version:	1.0.0.0
+License-File:	../LICENSE
+License:	BSD3
+Author:		Maxime Henrion
+Copyright:	2012, Maxime Henrion
+Maintainer:	Maxime Henrion <mhenrion@gmail.com>
+Build-Type:	Simple
+Cabal-Version:	>=1.2
+
+Executable deepseq-bench
+  Build-Depends:	base, criterion, generic-deepseq, deepseq
+  Main-is:		Benchmark.hs
+  Extensions:		PackageImports
+  GHC-Options:		-Wall -O2
