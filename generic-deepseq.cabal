@@ -47,6 +47,7 @@ Source-Repository head
 
 Library
   Build-Depends:	base >= 3 && < 5, ghc-prim >= 0.2
+  Hs-Source-Dirs:	src
   Exposed-Modules:	Control.DeepSeq
   Extensions:		FlexibleContexts, TypeOperators
   GHC-Options:		-Wall -O2
