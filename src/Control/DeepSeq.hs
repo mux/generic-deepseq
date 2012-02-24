@@ -88,7 +88,7 @@ class GDeepSeq f where
   grnf :: f a -> ()
 
 instance GDeepSeq U1 where
-  grnf _ = ()
+  grnf U1 = ()
 
 instance DeepSeq a => GDeepSeq (K1 i a) where
   grnf = rnf . unK1
