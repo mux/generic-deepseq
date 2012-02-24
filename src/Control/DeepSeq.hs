@@ -87,9 +87,6 @@ instance DeepSeq a => DeepSeq (Complex a) where
 class GDeepSeq f where
   grnf :: f a -> ()
 
-instance GDeepSeq V1 where
-  grnf _ = ()
-
 instance GDeepSeq U1 where
   grnf _ = ()
 
