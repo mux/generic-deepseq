@@ -1,3 +1,4 @@
+{-# LANGUAGE PackageImports #-}
 module Main where
 
 import Criterion.Main
