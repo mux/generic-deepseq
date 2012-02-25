@@ -88,6 +88,11 @@ class GDeepSeq f where
   grnf :: f a -> ()
 
 instance GDeepSeq U1 where
+  -- It is important to pattern match on the U1 constructor here. If we didn't
+  -- and used an underscore pattern, the following equality wouldn't hold:
+  --   x `deepseq` () = x `seq` () = _|_
+  --     where x = undefined :: T
+  -- with T being () or any unit-shaped type with a DeepSeq instance.
   grnf U1 = ()
 
 instance DeepSeq a => GDeepSeq (K1 i a) where
