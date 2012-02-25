@@ -44,8 +44,6 @@ Description:
   Changes in version 2.0.1.0:
   .
   * Fix the U1 and V1 instances.
-  .
-  * The V1 instance has been removed because it is actually useless.
 
 Source-Repository head
   Type:			mercurial
