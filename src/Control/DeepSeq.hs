@@ -95,7 +95,7 @@ instance GDeepSeq U1 where
   -- and used an underscore pattern, the following equality wouldn't hold:
   --   x `deepseq` () = x `seq` () = _|_
   --     where x = undefined :: T
-  -- with T being unit-shaped type with a DeepSeq instance.
+  -- with T being some unit-shaped type with a DeepSeq instance.
   grnf U1 = ()
 
 instance DeepSeq a => GDeepSeq (K1 i a) where
