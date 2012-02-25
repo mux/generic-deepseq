@@ -43,7 +43,7 @@ Description:
   .
   Changes in version 2.0.1.0:
   .
-  * Fix a big in the U1 instance.
+  * Fix the U1 and V1 instances.
   .
   * The V1 instance has been removed because it is actually useless.
 
