@@ -1,5 +1,5 @@
 Name:		generic-deepseq
-Version:	2.0.1.0
+Version:	2.0.1.1
 License-File:	LICENSE
 License:	BSD3
 Author:		Maxime Henrion
@@ -44,6 +44,10 @@ Description:
   Changes in version 2.0.1.0:
   .
   * Fix the U1 and V1 instances.
+  .
+  Changes in version 2.0.1.1:
+  .
+  * No functional changes, updated to correct the URLs of the repository and the issue tracker.
 
 Source-Repository head
   Type:			mercurial
