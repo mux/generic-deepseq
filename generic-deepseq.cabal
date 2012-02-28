@@ -5,7 +5,7 @@ License:	BSD3
 Author:		Maxime Henrion
 Copyright:	2012, Maxime Henrion
 Maintainer:	Maxime Henrion <mhenrion@gmail.com>
-Bug-Reports:	http://bitbucket.org/mumux/generic-deepseq/issues/
+Bug-Reports:	http://bitbucket.org/mux/generic-deepseq/issues/
 Category:	Control, Generics
 Synopsis:	Generic deep evaluation of data structures
 Build-Type:	Simple
@@ -47,7 +47,7 @@ Description:
 
 Source-Repository head
   Type:			mercurial
-  Location:		http://bitbucket.org/mumux/generic-deepseq/
+  Location:		http://bitbucket.org/mux/generic-deepseq/
 
 Library
   Build-Depends:	base >= 3 && < 5, ghc-prim >= 0.2
